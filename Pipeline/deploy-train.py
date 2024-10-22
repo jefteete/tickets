@@ -22,10 +22,10 @@ from azure.ai.ml.sweep import (
 )
 
 # NOTE:  set your workspace name here!
-workspace_name="CSAzureML"
+workspace_name="Cisco-ML"
 # NOTE:  if you do not have a cpu-cluster already, we will create one
 # Alternatively, change the name to a CPU-based compute cluster
-cluster_name="cpu-cluster"
+cluster_name="teeter-cpu-cluster"
 
 # NOTE:  for local runs, I'm using the Azure CLI credential
 # For production runs as part of an MLOps configuration using
