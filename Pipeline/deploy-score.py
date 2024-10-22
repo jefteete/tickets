@@ -79,18 +79,22 @@ except Exception:
     # Now, we pass the object to MLClient's create_or_update method
     cpu_cluster=ml_client.compute.begin_create_or_update(cpu_cluster)
 
-
 # Ensure that there is an endpoint for batch scoring
-endpoint_name="chicago-parking-tickets-batch"
+endpoint_name = "chi-parking-tickets-batch"
 try:
-    endpoint=ml_client.batch_endpoints.get(endpoint_name)
+    endpoint = ml_client.batch_endpoints.get(endpoint_name)
     print(f"You already have an endpoint named {endpoint_name}, we'll reuse it as is.")
-except Exception:
-    print("Creating a new batch endpoint")
-    endpoint=BatchEndpoint(name=endpoint_name, description="Batch scoring endpoint for Chicago Parking Ticket payment status")
-    ml_client.batch_endpoints.begin_create_or_update(endpoint).result()
-    endpoint=ml_client.batch_endpoints.get(endpoint_name)
-    print(f"Endpoint name:  {endpoint.name}")
+except Exception as e:
+    print(f"Creating a new batch endpoint... Error: {str(e)}")
+    endpoint = BatchEndpoint(name=endpoint_name, description="Batch scoring endpoint for Chicago Parking Ticket payment status")
+    try:
+        ml_client.batch_endpoints.begin_create_or_update(endpoint).result()
+        endpoint = ml_client.batch_endpoints.get(endpoint_name)
+        print(f"Endpoint name:  {endpoint.name}")
+    except Exception as create_error:
+        print(f"Error creating endpoint: {str(create_error)}")
+        raise
+    
 
 # Retrieve the parking tickets model
 model=ml_client.models.get(name="ChicagoParkingTicketsCodeFirst", version="1")
