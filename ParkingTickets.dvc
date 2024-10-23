@@ -1,0 +1,6 @@
+outs:
+- md5: ef4cf730a8ea987ce081c07fd93a6906.dir
+  size: 277085
+  nfiles: 2
+  hash: md5
+  path: ParkingTickets
