@@ -1,0 +1,6 @@
+[core]
+    remote = expertadvisorus2sa
+['remote "expertadvisorus2sa-1"']
+    url = azure://tickets/ParkingTickets
+['remote "expertadvisorus2sa"']
+    url = azure://tickets/ParkingTickets
